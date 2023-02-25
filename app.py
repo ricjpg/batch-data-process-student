@@ -1,15 +1,19 @@
 import pymongo
-from classes import DATA, Dataprocess
+from classes import DATA, Dataprocess, DbMongo
+from dotenv import load_dotenv
 
 def main():
-
-    pipeline = Dataprocess(DATA)
+    client, db = DbMongo.getDB()
     
-    pipeline.create_careers()
-    pipeline.create_students()
-    pipeline.create_enrollments()
+    # pipeline = Dataprocess(DATA)
+    
+    # pipeline.create_careers()
+    # pipeline.create_students()
+    # pipeline.create_enrollments()
 
-    return True
+    # return True
+    client.close()
 
 if __name__ == "__main__":
+    load_dotenv()
     main()
