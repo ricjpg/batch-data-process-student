@@ -1,3 +1,4 @@
+from .data import *
 class Dataprocess:
 
     def __init__(self, data):
@@ -7,8 +8,16 @@ class Dataprocess:
 
     
 
-    def create_careers(self):
+    def create_careers(self,db):
         ## Do something to create careers on your mongodb collection using __data
+        collection = db['Careers']
+        result = collection.aggregate([
+            {
+                '$set': {careers:data.careers}
+            }
+        ])
+
+
 
         return True
     def create_courses(self):

@@ -1,4 +1,5 @@
 from classes.DbMongo import DbMongo
+from .data import *
 class Careers:
     
     def __init__(self, careers, id = ""):
