@@ -29,9 +29,10 @@ def main():
     #-------------------Retrieving data------------------------#
     # Courses.get_students_status(db)
     # Careers.get_students_status(db)
-    
-    Students.get_just_careers(db) #this method list envery career, no repeat
 
+    Students.get_just_careers(db) #this method list envery career, no repeat
+    print("----------------------------------------------------------------")
+    Students.get_just_courses(db) #this method list every course, no repeat
 
 
     # return True
