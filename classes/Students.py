@@ -136,17 +136,28 @@ class Students:
     def get_just_careers(db):
         collection = db["Students"]
         result = collection.aggregate([
-            {"$group":{"_id":{"carrera":"$carrera"}}}
+            {"$group":{"_id":{"carrera":"$carrera"},"total":{"$sum":1}}}
         ])
         for e in result:
             print(e)
 
     @staticmethod
-    def get_just_courses(db):
+    def approved_by_course(db):
         collection = db["Students"]
         result = collection.aggregate([
             {"$unwind":"$cursos_aprobados"},
-            {"$group":{"_id":{"Course":"$cursos_aprobados"}}},
+            {"$group":{"_id":{"Course":"$cursos_aprobados"},"Approved by course":{"$sum":1}}},
+
+        ])
+        for e in result:
+            print(e)
+
+    @staticmethod
+    def failed_by_course(db):
+        collection = db["Students"]
+        result = collection.aggregate([
+            {"$unwind":"$cursos_reprobados"},
+            {"$group":{"_id":{"Course":"$cursos_reprobados"},"Failed by course":{"$sum":1}}},
 
         ])
         for e in result:
