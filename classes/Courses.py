@@ -25,22 +25,42 @@ class Courses:
         collection.delete_one( filterToUse )
 
     @staticmethod
+    def save_all_DATA(db,DATA):
+        collection = db['Courses']
+        # for dicc in DATA:
+        #     campoA = dicc['cursos_aprobados']
+        #     # campoR = dicc['cursos_reprobados']
+        #     collection.update_one({'cursos_aprobados':campoA},
+        #     {'$set':dicc},upsert=True)
+        #     # collection.update_one({'cursos_reprobados':campoR},
+        #     # {'$set':dicc},upsert=True)
+        cursos = []
+        for dic in DATA:
+            for cursos_aprobados in dic['cursos_aprobados']:
+                cursos.append(cursos_aprobados)
+
+        cursos = list(set(cursos))
+        for cursos_aprobados in cursos:
+            collection.insert_one({'cursos_aprobados': cursos_aprobados})
+
+
+    @staticmethod
     def get_list(db):
         collection = db["Courses"]
         courses = collection.find()
 
-        list_courses = []
+        list_c = []
         for s in courses:
-            temp_courses = Courses(
-                s["courses"],
+            temp_c = Courses(
+                s["cursos_aprobados"],
                 s["_id"]
                 )
-            list_courses.append(temp_courses)
-        return list_courses
-
+            list_c.append(temp_c)
+        return list_c
 
     @staticmethod
     def delete_all(db):
         list_c = Courses.get_list(db)
         for c in list_c:
             c.delete(db)
+

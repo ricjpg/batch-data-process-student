@@ -24,6 +24,14 @@ class Careers:
         collection.delete_one( filterToUse )
 
     @staticmethod
+    def save_all_DATA(db,DATA):
+        collection = db['Careers']
+        for dicc in DATA:
+            campo = dicc['carrera']
+            collection.update_one({'carrera':campo},{'$set':dicc},upsert=True)
+  
+
+    @staticmethod
     def get_list(db):
         collection = db["Careers"]
         career = collection.find()
@@ -31,7 +39,7 @@ class Careers:
         list_careers = []
         for s in career:
             temp_career = Careers(
-                s["careers"],
+                s["carrera"],
                 s["_id"]
                 )
             list_careers.append(temp_career)

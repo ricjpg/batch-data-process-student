@@ -44,17 +44,6 @@ class Students:
         collection.delete_one( filterToUse )
 
 
-
-    @staticmethod
-    def saveAll(self, data, db):
-        collection = db[self.__collection]
-        student = collection.find()
-        list_st = []
-        for s in student:
-            list_st.append(data[s])
-        return list_st
-
-
     @staticmethod
     def get_list(db):
         collection = db["Students"]
@@ -73,30 +62,19 @@ class Students:
             list_student.append(temp_student)
         return list_student
 
-    #este va con solo objStudent
-    # @staticmethod
-    # def get_list(db):
-    #     collection = db["Students"]
-    #     student = collection.find()
-
-    #     list_student = []
-    #     for s in student:
-    #         temp_student = Students(
-    #             s["objStudent"],
-    #             s["_id"]
-    #             )
-    #         list_student.append(temp_student)
-    #     return list_student
-
+    @staticmethod
+    def save_all_DATA(db, DATA):
+        for index in DATA:
+            Students(index['numero_cuenta'],
+                index['nombre_completo'],
+                index['cursos_aprobados'],
+                index['cursos_reprobados'],
+                index['edad'],
+                index['carrera'],
+                ).save(db)
 
     @staticmethod
     def delete_all(db):
         list_s = Students.get_list(db)
         for s in list_s:
             s.delete(db)
-
-    @staticmethod
-    def insert_many(db):
-        collection = db["Students"]
-        for s in students:
-            collection.insert_one(s.__dict__)
