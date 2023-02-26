@@ -12,12 +12,29 @@ def main():
     # Courses.delete_all(db)
 
 
-    #-------------------idk----------------------------#
     #----------I didnt use this functions--------------#
-    # pipeline = Dataprocess(db)
 
-    # pipeline.create_careers()
-    # pipeline.create_students()
+    #----------########-UPDATE-###########--------------#
+    #----------Now i can use this funtions--------------#
+    #---------drop every collection to start fresh------#
+    
+    db.Students.drop()
+    db.Careers.drop()
+    db.Courses.drop()
+    pipeline = Dataprocess(DATA)
+
+    # #------------Set all the data in collection----------#
+
+
+    pipeline.create_careers(db,DATA)
+    pipeline.create_students(db,DATA)
+    pipeline.create_courses(db, DATA)
+
+    #-----------------Retrieve some data----------------#
+    pipeline.get_students_per_career(db)
+    pipeline.approved_by_course(db)
+    pipeline.failed_by_course(db)
+    # pipeline.get_enrollements(db)
     # pipeline.create_enrollments()
 
 
