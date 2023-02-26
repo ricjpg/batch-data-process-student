@@ -87,5 +87,8 @@ Estos dos reportes deberian de ser invocados despues de las lineas de la migraci
 
 
 <p align="center">
-  <img src="1.png" alt="test de Captura de datos" style="text-align:center" />
+  <img src="1.png" alt="Reporte de alumnos por carrera, aprobados por clase y reprobados por clase" style="text-align:center" />
+</p>
+<p align="center">
+  <img src="2.png" alt="Coleccion Students" style="text-align:center" />
 </p>

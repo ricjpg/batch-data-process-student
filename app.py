@@ -7,9 +7,9 @@ def main():
     printer = pprint.PrettyPrinter()
     client, db = DbMongo.getDB()
     #-------------------Cleanup------------------------#
-    Students.delete_all(db)
-    Careers.delete_all(db)
-    Courses.delete_all(db)
+    # Students.delete_all(db)
+    # Careers.delete_all(db)
+    # Courses.delete_all(db)
 
 
     #-------------------idk----------------------------#
@@ -22,24 +22,24 @@ def main():
 
 
     #-------------------Setting some data------------------------#
-    Careers.save_all_DATA(db,DATA)
-    Students.save_all_DATA(db,DATA)
-    Courses.save_all_DATA(db,DATA)
+    # Careers.save_all_DATA(db,DATA)
+    # Students.save_all_DATA(db,DATA)
+    # Courses.save_all_DATA(db,DATA)
 
 
-    #-------------------Retrieving data------------------------#
-    #this method the number of students in every career
-    Students.get_just_careers(db) 
-    print("----------------------------------------------------------------")
+    # #-------------------Retrieving data------------------------#
+    # #this method the number of students in every career
+    # Students.get_just_careers(db) 
+    # print("----------------------------------------------------------------")
     
     
-    #this method shows the number of students approved by course
-    Students.approved_by_course(db) 
-    print("----------------------------------------------------------------")
+    # #this method shows the number of students approved by course
+    # Students.approved_by_course(db) 
+    # print("----------------------------------------------------------------")
     
 
-    #this method shows the number of students failed by course
-    Students.failed_by_course(db)
+    # #this method shows the number of students failed by course
+    # Students.failed_by_course(db)
 
     # return True
     client.close()
