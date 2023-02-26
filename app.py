@@ -9,7 +9,7 @@ def main():
     #-------------------Cleanup------------------------#
     # Students.delete_all(db)
     # Careers.delete_all(db)
-    Courses.delete_all(db)
+    # Courses.delete_all(db)
 
 
     #-------------------idk----------------------------#
@@ -24,15 +24,14 @@ def main():
     # Careers.save_all_DATA(db,DATA)
     # Students.save_all_DATA(db,DATA)
     # Courses.save_all_DATA(db,DATA)
-    # Careers.quantity(db)
-    # Careers.save_all_DATA(db,Students.get_list_careers)
-    # Careers.quantity(db)
-    # Students.quantity(db)
 
-    Courses.save_all_DATA(db,DATA)
 
     #-------------------Retrieving data------------------------#
-    # print(Courses.get_courses_approved(db))
+    # Courses.get_students_status(db)
+    # Careers.get_students_status(db)
+    
+    Students.get_just_careers(db) #this method list envery career, no repeat
+
 
 
     # return True

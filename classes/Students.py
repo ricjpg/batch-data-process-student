@@ -100,10 +100,47 @@ class Students:
 
     
 
+    # @staticmethod
+    # def get_just_careers(db):
+    #     collection = db["Students"]
+    #     result = collection.aggregate([
+    #         {'$group':{'_id':'$carrera'}},
+    #         {'$count':'carrera'},
+    #         {
+    #             '$project': {
+    #                 '_id': 0,
+    #                 'carrera': 1,
+    #         }
+    #         }
+    #     ])
+    #     for e in result:
+    #         print(e)
+
+    # @staticmethod
+    # def get_just_careers(db):
+    #     collection = db["Students"]
+    #     result = collection.aggregate([
+    #         {'$lookup':{'from':''}},
+    #         {'$count':'carrera'},
+    #         {
+    #             '$project': {
+    #                 '_id': 0,
+    #                 'carrera': 1,
+    #         }
+    #         }
+    #     ])
+    #     for e in result:
+    #         print(e)
+
     @staticmethod
     def get_just_careers(db):
         collection = db["Students"]
         result = collection.aggregate([
-            {'$group':{'_id':'carrera'}},
-            {'$count':'carrera'},
+            {"$group":{"_id":"$carrera"}}
+            # {"$group":{"_id":{"carrera":"$carrera", 
+            # "carrera":"$carrera"}}}
+            # {"$group":{"_id":{"cursos_aprobados":"$cursos_aprobados", 
+            # "cursos_reprobados":"$cursos_reprobados"}}}
         ])
+        for e in result:
+            print(e)

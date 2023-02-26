@@ -67,3 +67,16 @@ class Careers:
         ])
         for c in result:
             print(c)
+
+
+    @staticmethod
+    def get_students_status(db):
+        collection = db["Careers"]
+        result = collection.aggregate([
+            {
+                '$group': {'_id':'$cursos_aprobados[]'}},
+                {'$count': 'cursos_aprobados'}
+
+        ])
+        for e in result:
+            print(e)
