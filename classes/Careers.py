@@ -28,7 +28,8 @@ class Careers:
         collection = db['Careers']
         for dicc in DATA:
             campo = dicc['carrera']
-            collection.update_one({'carrera':campo},{'$set':dicc},upsert=True)
+            collection.update_one({'carrera':campo},
+            {'$set':dicc},upsert=True)
   
 
     @staticmethod
@@ -51,3 +52,18 @@ class Careers:
         list_c = Careers.get_list(db)
         for c in list_c:
             c.delete(db)
+
+    @staticmethod
+    def quantity(db):
+        collection = db["Careers"]
+        # career = collection.find()
+        result = collection.aggregate([
+            {
+                "$group": {
+                    "_id": {"carrera": "$carrera"},
+                    "$count": "carrera"
+                }
+            }
+        ])
+        for c in result:
+            print(c)

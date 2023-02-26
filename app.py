@@ -10,6 +10,8 @@ def main():
     # Students.delete_all(db)
     # Careers.delete_all(db)
     Courses.delete_all(db)
+
+
     #-------------------idk----------------------------#
     # pipeline = Dataprocess(db)
 
@@ -17,12 +19,23 @@ def main():
     # pipeline.create_students()
     # pipeline.create_enrollments()
 
+
     #-------------------Setting some data------------------------#
     # Careers.save_all_DATA(db,DATA)
     # Students.save_all_DATA(db,DATA)
+    # Courses.save_all_DATA(db,DATA)
+    # Careers.quantity(db)
+    # Careers.save_all_DATA(db,Students.get_list_careers)
+    # Careers.quantity(db)
+    # Students.quantity(db)
+
     Courses.save_all_DATA(db,DATA)
 
-    return True
+    #-------------------Retrieving data------------------------#
+    # print(Courses.get_courses_approved(db))
+
+
+    # return True
     client.close()
 
 if __name__ == "__main__":

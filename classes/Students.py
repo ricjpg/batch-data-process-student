@@ -78,3 +78,32 @@ class Students:
         list_s = Students.get_list(db)
         for s in list_s:
             s.delete(db)
+
+
+    @staticmethod
+    def get_list_careers(db):
+        collection = db["Students"]
+        student = collection.find()
+        list_student = []
+        for s in student:
+            temp_student = Students(
+                s["numero_cuenta"],
+                s["nombre_completo"],
+                s["cursos_aprobados"],
+                s["cursos_reprobados"],
+                s["edad"],
+                s["carrera"],
+                s["_id"]
+                )
+            list_student.append(temp_student)
+            return list_student['carrera']
+
+    
+
+    @staticmethod
+    def get_just_careers(db):
+        collection = db["Students"]
+        result = collection.aggregate([
+            {'$group':{'_id':'carrera'}},
+            {'$count':'carrera'},
+        ])
