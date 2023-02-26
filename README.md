@@ -84,3 +84,8 @@ Estos dos reportes deberian de ser invocados despues de las lineas de la migraci
 - Su documento de word debe de tener como nombre de archivo: NUMEROCUENTA_NOMBRE1_APELLIDO1.docx
 - El reporsitorio debe de ser PUBLICO
 - Cree una carpeta que llame imagenes y guarde capturas de pantallas de las colecciones con los resultados migrados (5 puntos)
+
+
+<p align="center">
+  <img src="1.png" alt="test de Captura de datos" style="text-align:center" />
+</p>
