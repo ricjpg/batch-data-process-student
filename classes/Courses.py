@@ -1,4 +1,5 @@
-
+from classes.DbMongo import DbMongo
+from .data import *
 
 class Courses:
 
@@ -7,6 +8,31 @@ class Courses:
         self.__id = id
         self.__collection = "Courses"
 
+
+    @staticmethod
+    def get_approved(db):
+        print("\n\tStudents approved by courses\n")
+        collection = db['Students']
+        result = collection.aggregate([
+            {"$unwind":"$cursos_aprobados"},
+            {"$group":{"_id":{"Course":"$cursos_aprobados"},"Approved":{"$sum":1}}},
+        ])
+        for i in result:
+            print(i)
+
+    @staticmethod
+    def get_failed(db):
+        print("\n\tStudents failed by courses\n")
+        collection = db['Students']
+        result = collection.aggregate([
+            {"$unwind":"$cursos_reprobados"},
+            {"$group":{"_id":{"Course":"$cursos_reprobados"},"Failed":{"$sum":1}}}
+        ])
+        for i in result:
+            print(i)
+
+
+#################################################################################
 
     def save(self, db):
         collection = db[self.__collection]
@@ -23,85 +49,3 @@ class Courses:
         collection = db[self.__collection]
         filterToUse = { '_id' : self.__id }
         collection.delete_one( filterToUse )
-
-    # @staticmethod
-    # def save_all_DATA(db,DATA):
-    #     collection = db['Courses']
-    #     # for dicc in DATA:
-    #     #     campoA = dicc['cursos_aprobados']
-    #     #     # campoR = dicc['cursos_reprobados']
-    #     #     collection.update_one({'cursos_aprobados':campoA},
-    #     #     {'$set':dicc},upsert=True)
-    #     #     # collection.update_one({'cursos_reprobados':campoR},
-    #     #     # {'$set':dicc},upsert=True)
-    #     cursos = []
-    #     for dic in DATA:
-    #         for cursos_aprobados in dic['cursos_aprobados']:
-    #             cursos.append(cursos_aprobados)
-
-    #     cursos = list(set(cursos))
-    #     for cursos_aprobados in cursos:
-    #         collection.insert_one({'cursos_aprobados': cursos_aprobados}upsert=True)
-
-    # @staticmethod
-    # def save_all_DATA(db,DATA):
-    #     collection = db['Courses']
-    #     for dicc in DATA:
-    #         for curso in dicc['cursos_aprobados']:
-    #             gotit = curso['cursos_aprobados']
-    #             collection.update_one({'cursos_aprobados':gotit['cursos_aprobados']},
-    #             {'$set':gotit['cursos_aprobados']},upsert=True)
-
-
-    @staticmethod
-    def save_all_DATA(db,DATA):
-        collection = db['Courses']
-        for diccionario in DATA:
-            for valor in diccionario['cursos_aprobados']:
-                if not collection.find_one({'course': valor}):
-                    collection.insert_one({'course': valor})
-
-
-
-    @staticmethod
-    def get_list(db):
-        collection = db["Courses"]
-        courses = collection.find()
-
-        list_c = []
-        for s in courses:
-            temp_c = Courses(
-                s["course"],
-                s["_id"]
-                )
-            list_c.append(temp_c)
-        return list_c
-
-    @staticmethod
-    def delete_all(db):
-        list_c = Courses.get_list(db)
-        for c in list_c:
-            c.delete(db)
-
-    
-
-    @staticmethod
-    def get_courses_approved(db):
-        collection = db["Courses"]
-        courses = collection.find()
-        list_approved = []
-        for s in courses:
-            if s["cursos_aprobados"]:
-                list_approved.append(s["cursos_aprobados"])
-
-        return list_approved
-
-    @staticmethod
-    def get_courses_failed(db):
-        collection = db["Courses"]
-        results = collection.aggregate([
-
-            {'$group':{'_id':'cursos_aprobados'}},
-            {'$count':"reprobados"}
-
-        ])

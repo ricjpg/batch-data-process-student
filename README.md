@@ -92,3 +92,18 @@ Estos dos reportes deberian de ser invocados despues de las lineas de la migraci
 <p align="center">
   <img src="2.png" alt="Coleccion Students" style="text-align:center" />
 </p>
+<p align="center">
+  <img src="Careers-mongodb.jpg" alt="Screenshot of Careers in database" style="text-align:center" />
+</p>
+<p align="center">
+  <img src="Enrollments-mongodb.jpg" alt="Screenshot of Courses in database" style="text-align:center" />
+</p>
+<p align="center">
+  <img src="Students-mongodb.jpg" alt="Screenshot of Enrollments in database" style="text-align:center" />
+</p>
+<p align="center">
+  <img src="Courses-mongodb.jpg" alt="Screenshot of Students in database" style="text-align:center" />
+</p>
+<p align="center">
+  <img src="cmder.jpg" alt="Screenshot of cmder for the reports" style="text-align:center" />
+</p>

@@ -53,30 +53,15 @@ class Careers:
         for c in list_c:
             c.delete(db)
 
-    @staticmethod
-    def quantity(db):
-        collection = db["Careers"]
-        # career = collection.find()
-        result = collection.aggregate([
-            {
-                "$group": {
-                    "_id": {"carrera": "$carrera"},
-                    "$count": "carrera"
-                }
-            }
-        ])
-        for c in result:
-            print(c)
+
 
 
     @staticmethod
-    def get_students_status(db):
-        collection = db["Careers"]
+    def get_students_per_career(db):
+        print("\n\tStudents per Career\n")
+        collection = db['Students']
         result = collection.aggregate([
-            {
-                '$group': {'_id':'$cursos_aprobados[]'}},
-                {'$count': 'cursos_aprobados'}
-
+            {"$group":{"_id":{"carrera":"$carrera"},"total":{"$sum":1}}}
         ])
-        for e in result:
-            print(e)
+        for i in result:
+            print(i)

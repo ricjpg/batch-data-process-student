@@ -6,57 +6,33 @@ import pprint
 def main():
     printer = pprint.PrettyPrinter()
     client, db = DbMongo.getDB()
-    #-------------------Cleanup------------------------#
-    # Students.delete_all(db)
-    # Careers.delete_all(db)
-    # Courses.delete_all(db)
+    pipeline = Dataprocess(DATA)
 
-
-    #----------I didnt use this functions--------------#
-
-    #----------########-UPDATE-###########--------------#
-    #----------Now i can use this funtions--------------#
+    #--------------------Cleanup------------------------#
     #---------drop every collection to start fresh------#
     
     db.Students.drop()
     db.Careers.drop()
+    db.Enrollments.drop()
     db.Courses.drop()
-    pipeline = Dataprocess(DATA)
 
-    # #------------Set all the data in collection----------#
+    #----------Setting all the data in the collections----------#
 
 
     pipeline.create_careers(db,DATA)
     pipeline.create_students(db,DATA)
-    pipeline.create_courses(db, DATA)
-
-    #-----------------Retrieve some data----------------#
-    pipeline.get_students_per_career(db)
-    pipeline.approved_by_course(db)
-    pipeline.failed_by_course(db)
-    # pipeline.get_enrollements(db)
-    # pipeline.create_enrollments()
+    pipeline.create_courses(db,DATA)
+    pipeline.create_enrollments(db,DATA)
 
 
-    #-------------------Setting some data------------------------#
-    # Careers.save_all_DATA(db,DATA)
-    # Students.save_all_DATA(db,DATA)
-    # Courses.save_all_DATA(db,DATA)
-
-
-    # #-------------------Retrieving data------------------------#
-    # #this method the number of students in every career
-    # Students.get_just_careers(db) 
-    # print("----------------------------------------------------------------")
+    #-----------------Retrieve some data-----------------------#
+    #----------------------------REPORTS-----------------------#
+    
+    Careers.get_students_per_career(db)
+    Courses.get_approved(db)
+    Courses.get_failed(db)
     
     
-    # #this method shows the number of students approved by course
-    # Students.approved_by_course(db) 
-    # print("----------------------------------------------------------------")
-    
-
-    # #this method shows the number of students failed by course
-    # Students.failed_by_course(db)
 
     # return True
     client.close()
